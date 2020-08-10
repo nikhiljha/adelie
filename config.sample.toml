@@ -1,0 +1,51 @@
+[settings]
+github_api_key = "give.it.repo.*.permissions.to.work.properly"
+
+[[repo]]
+github_id = "ocf/grafana"
+
+  [[repo.software]]
+  name = "grafana"
+  changelog = "https://github.com/grafana/grafana/releases/tag/v{0}"
+  file = "Makefile"
+  regex = "(?<=GF_VERSION := )(.*)(?=\n)"
+  type = "relmon"
+  id = "13916"
+
+[[repo]]
+github_id = "ocf/keycloak"
+
+  [[repo.software]]
+  name = "keycloak"
+  changelog = "https://www.keycloak.org/docs/latest/release_notes/"
+  file = "Makefile"
+  regex = "(?<=KEYCLOAK_VERSION := )(.*)(?=\n)"
+  type = "relmon"
+  id = "20430"
+
+[[repo]]
+github_id = "ocf/matrix"
+
+  [[repo.software]]
+  name = "synapse"
+  changelog = "https://github.com/matrix-org/synapse/releases/tag/v{0}"
+  file = "Makefile"
+  regex = "(?<=SYNAPSE_VERSION := v)(.*)(?=-py3\n)"
+  type = "relmon"
+  id = "15283"
+
+  [[repo.software]]
+  name = "element"
+  changelog = "https://github.com/vector-im/element-web/releases/tag/v{0}"
+  file = "Makefile"
+  regex = "(?<=RIOT_VERSION := v)(.*)(?=\n)"
+  type = "relmon"
+  id = "18626"
+
+  [[repo.software]]
+  name = "bridge"
+  changelog = "https://github.com/matrix-org/matrix-appservice-irc/releases/tag/{0}"
+  file = "Makefile"
+  regex = "(?<=BRIDGE_VERSION := release-)(.*)(?=\n)"
+  type = "relmon"
+  id = "121056"
