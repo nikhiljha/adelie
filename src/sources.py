@@ -1,12 +1,5 @@
 import requests
 
-def make_source(type, id):
-    if type == "relmon":
-        return ReleaseMonitoring(type, id)
-    if type == "npm":
-        return NPM(type, id)
-    raise Exception("No such source.")
-
 class Source:
     """A place to pull version numbers from."""
 
@@ -83,3 +76,10 @@ class NPM(Source):
     def get_all_versions(self) -> list:
         """Get a list of all versions for a piece of software."""
         return [x for x in self.data["versions"]]
+
+def make_source(type, id) -> Source:
+    if type == "relmon":
+        return ReleaseMonitoring(type, id)
+    if type == "npm":
+        return NPM(type, id)
+    raise Exception("No such source.")
