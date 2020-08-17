@@ -1,5 +1,6 @@
 [settings]
 github_api_key = "give.it.repo.*.permissions.to.work.properly"
+dry_run = true
 
 [[repo]]
 github_id = "ocf/grafana"
