@@ -1,2 +1,2 @@
-PyGithub==1.5.3
+PyGithub==1.53
 tomlkit==0.7.0

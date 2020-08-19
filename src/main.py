@@ -1,12 +1,12 @@
+import argparse
+import os
 import re
 import tomlkit
-import sys
-import os
-
-from sources import make_source
 
 from github_ex import GitRepo
 from github_ex import GithubCredentials
+
+from sources import make_source
 
 def process(repo, software, config):
     regex = re.compile(software["regex"])
@@ -57,7 +57,15 @@ You can get more information about this deployment at {config["settings"]["conta
         print(f"[Info] {software['name']} is already {latest}, no need to update.")
 
 def main(config=None):
-    with open("../config.toml", "r") as configfile:
+    parser = argparse.ArgumentParser(description='Automatically update git-ops deployments.')
+    parser.add_argument('name', metavar='name', type=str, nargs='*',
+                    help='names of software to update (default: update all software in config)')
+    parser.add_argument('--config', dest='config_file', nargs='?', default="config.toml",
+                    help='config file to use (default: config.toml)')
+    args = parser.parse_args()
+
+
+    with open(args.config_file, "r") as configfile:
         config = tomlkit.parse(configfile.read())
     if config == None or config == {}:
         raise Exception("Failed to read config file.")
@@ -69,11 +77,11 @@ def main(config=None):
     assert len(github_api_key) == 40
     gh_creds = GithubCredentials(token=github_api_key)
 
-    print("Checking for updates", f"for {sys.argv[1]}." if len(sys.argv) > 1 else "for all deployments.")
+    print("Checking for updates", f"for {args.name}." if args.name else "for all deployments.")
     for repo in config["repo"]:
         gh = GitRepo(repo["github_id"], gh_creds)
         for software in repo["software"]:
-            if (len(sys.argv) > 1 and software["name"] == sys.argv[1]) or (len(sys.argv) <= 1):
+            if (args.name and software["name"] in args.name) or (not args.name):
                 process(gh, software, config)
     print("Update check complete.")
 
