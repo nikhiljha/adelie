@@ -38,7 +38,7 @@ def process(repo, software, config):
         print(f"[Info] Updating {software['name']} from {current} to {latest}.")
         content = regex.sub(latest, content)
         print("[Info] Creating new branch.")
-        repo.modify_and_branch(base_branch, branch_name, f"automatically bump version to {latest}", software["file"], content)
+        repo.modify_and_branch(base_branch, branch_name, f"automatically bump {software['name']} to {latest}", software["file"], content)
         print("[Info] Making pull request.")
         prtitle = f"[Automatic] Update {software['name']} from {current} to {latest}."
         changelog_url = software["changelog"].format(latest)
