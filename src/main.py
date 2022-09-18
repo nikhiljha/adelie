@@ -2,6 +2,7 @@ import argparse
 import os
 import re
 import tomlkit
+import traceback
 
 from github_ex import GitRepo
 from github_ex import GithubCredentials
@@ -82,7 +83,10 @@ def main(config=None):
         gh = GitRepo(repo["github_id"], gh_creds)
         for software in repo["software"]:
             if (args.name and software["name"] in args.name) or (not args.name):
-                process(gh, software, config)
+                try:
+                    process(gh, software, config)
+                except Exception:
+                    traceback.print_exc()
     print("Update check complete.")
 
 if __name__ == "__main__":
