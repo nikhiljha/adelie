@@ -1,6 +1,8 @@
-FROM python:3.8.5-alpine3.12
+FROM python:3.9.5-buster
 
-COPY . /adelie
-RUN cd /adelie && pip install -r requirements.txt
+RUN pip install --no-cache-dir poetry
+COPY . /src
+RUN cd /src && poetry config virtualenvs.create false
+RUN cd /src && poetry install --no-dev
 
-CMD python3 /adelie/src/main.py
+CMD python -m adelie

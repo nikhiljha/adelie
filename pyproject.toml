@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "adelie"
+version = "0.1.0"
+description = "external dependency update tool for gitops"
+authors = ["Nikhil Jha <mail@nikhiljha.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+PyGithub = "^1.55"
+tomlkit = "^0.7.2"
+loguru = "^0.5.3"
+Jinja2 = "^3.0.1"
+click = "^8.0.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+black = "^21.5b1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

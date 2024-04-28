@@ -1,5 +1,9 @@
 ### Adelie ###
 config.toml
+.env
+
+### VSCode ###
+.vscode
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
